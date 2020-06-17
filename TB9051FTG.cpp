@@ -82,3 +82,7 @@ uint8_t TB9051FTG::getDiagnostic(void) {
     return this->diag != kPinNotUsed? digitalRead(this->diag): kPinNotUsed;
 }
 
+uint8_t TB9051FTG::getEnPin(void) const {
+    return this->en;
+}
+
