@@ -35,68 +35,70 @@ For information regarding the TB9051FTG motor driver carrier's pinout, see the D
    As an example, the program should pass this constant to the constructor when the EN pin on the motor carrier is not connected to the Arduino (i.e., when the EN pin is electrically connected to VCC or GND).
 
 ### Constructor
-* `TB9051FTG`
+* `TB9051FTG(uint8_t pwm1, uint8_t pwm2, uint8_t ocm = kPinNotUsed,
+              uint8_t diag = kPinNotUsed, uint8_t occ = kPinNotUsed,
+              uint8_t en = kPinNotUsed, uint8_t enb = kPinNotUsed);`
 
- Custom constructor for the TB9051FTG. It configures all the pins and sets some default operating modes. Some arguments have default values, so they do not need to be specified when calling the constructor. An exception to this is when a non-default argument is specified after default arguments. In this case, the unused arguments need to be specified with `kPinNotUsed`.
+  Custom constructor for the TB9051FTG. It configures all the pins and sets some default operating modes. Some arguments have default values, so they do not need to be specified when calling the constructor. An exception to this is when a non-default argument is specified after default arguments. In this case, the unused arguments need to be specified with `kPinNotUsed`.
 
- Arguments:
- * `pwm1` The pin number connected to the PWM1 input on the motor driver carrier.
- * `pwm2` The pin number connected to the PWM2 input on the motor driver carrier.
- * `ocm` (optional) The pin number connected to the OCM output on the motor driver carrier. Defaults to `kPinNotUsed`.
- * `diag` (optional) The pin number connected to the DIAG output on the motor driver carrier. Defaults to `kPinNotUsed`.
- * `occ` (optional) The pin number connected to the OCC input on the motor driver carrier. Defaults to `kPinNotUsed`.
- * `en` (optional) The pin number connected to the EN input on the motor driver carrier. Defaults to `kPinNotUsed`.
- * `enb` (optional) The pin number connected to the ENB input on the motor driver carrier. Defaults to `kPinNotUsed`.
+  Arguments:
+  * `pwm1` The pin number connected to the PWM1 input on the motor driver carrier.
+  * `pwm2` The pin number connected to the PWM2 input on the motor driver carrier.
+  * `ocm` (optional) The pin number connected to the OCM output on the motor driver carrier. Defaults to `kPinNotUsed`.
+  * `diag` (optional) The pin number connected to the DIAG output on the motor driver carrier. Defaults to `kPinNotUsed`.
+  * `occ` (optional) The pin number connected to the OCC input on the motor driver carrier. Defaults to `kPinNotUsed`.
+  * `en` (optional) The pin number connected to the EN input on the motor driver carrier. Defaults to `kPinNotUsed`.
+  * `enb` (optional) The pin number connected to the ENB input on the motor driver carrier. Defaults to `kPinNotUsed`.
 
 ### Functions
-* `getCurrent`
+* `float getCurrent(void) const;`
 
- Reads an estimate of the motor current from the motor driver carrier. Output is in milliamps (mA). **Note:** This measurement is a coarse approximation only. Consider using an external sensor for fine current measurements.
+  Reads an estimate of the motor current from the motor driver carrier. Output is in milliamps (mA). **Note:** This measurement is a coarse approximation only. Consider using an external sensor for fine current measurements.
 
- Arguments:
- * None
+  Arguments:
+  * None
 
- Returns:
- * Current measurement in mA.
-
-
-* `getDiagnostic`
-
- Reads the DIAG pin on the motor driver carrier. If there is a fault, or if the motor driver carrier is disabled by the EN or ENB pins, it returns logical low (`0`). Otherwise, it returns logical high (`1`).
-
- Arguments:
- * None
-
- Returns:
- * `0` if fault or disabled. `1` otherwise.
+  Returns:
+  * Current measurement in mA.
 
 
-* `setDeadband`
+* `uint8_t getDiagnostic(void) const;`
 
- Sets the dead band range. When the throttle output value is within this range, the motor driver carrier stops the motor according to the current brake mode configuration.
+  Reads the DIAG pin on the motor driver carrier. If there is a fault, or if the motor driver carrier is disabled by the EN or ENB pins, it returns logical low (`0`). Otherwise, it returns logical high (`1`).
 
- Arguments:
- * `lower` Lower dead band value (exclusively).
- * `upper` Upper dead band value (exclusively).
+  Arguments:
+  * None
 
- Returns:
- * None
-
-
-* `setBrakeMode`
-
- Sets the brake mode for the motor driver carrier. If the carrier is set to brake mode (mode `1`), the carrier outputs will be shorted to ground when the motor stops. This acts as a brake. If the carrier is not set to brake mode (`0`), the carrier outputs will be left floating, so the motor will coast to a stop.
-
- Arguments:
- * `mode` Brake mode (`1`) or non brake mode (`0`).
-
- Returns:
- * None
+  Returns:
+  * `0` if fault or disabled. `1` otherwise.
 
 
-* `setOutput`
+* `void setDeadband(float lower, float upper);`
 
- Sets the throttle output percentage [-1, 1], which is the percentage of the driver carrier's input voltage. When the output percentage is negative, the motor will turn in reverse.
+  Sets the dead band range. When the throttle output value is within this range, the motor driver carrier stops the motor according to the current brake mode configuration.
+
+  Arguments:
+  * `lower` Lower dead band value (exclusively).
+  * `upper` Upper dead band value (exclusively).
+
+  Returns:
+  * None
+
+
+* `void setBrakeMode(bool mode);`
+
+  Sets the brake mode for the motor driver carrier. If the carrier is set to brake mode (mode `1`), the carrier outputs will be shorted to ground when the motor stops. This acts as a brake. If the carrier is not set to brake mode (`0`), the carrier outputs will be left floating, so the motor will coast to a stop.
+
+  Arguments:
+  * `mode` Brake mode (`1`) or non brake mode (`0`).
+
+  Returns:
+  * None
+
+
+* `void setOutput(float percent) const;`
+
+  Sets the throttle output percentage [-1, 1], which is the percentage of the driver carrier's input voltage. When the output percentage is negative, the motor will turn in reverse.
 
  Arguments:
  * `percent` output throttle percentage.
@@ -105,31 +107,31 @@ For information regarding the TB9051FTG motor driver carrier's pinout, see the D
  * None
 
 
-* `setOcc`
+* `void setOcc(uint8_t value) const;`
 
- Sets the over-current response. If low (`0`), the motor driver carrier is disabled when an over-current event happens. The motor driver carrier can be reset by toggling either the EN pin or the ENB pin. If high (`1`), the motor driver carrier will re-enable after a short period following an over-current event.
+  Sets the over-current response. If low (`0`), the motor driver carrier is disabled when an over-current event happens. The motor driver carrier can be reset by toggling either the EN pin or the ENB pin. If high (`1`), the motor driver carrier will re-enable after a short period following an over-current event.
 
- Arguments:
- * `value` over-current response (`1`, or `0`).
-
-
-* `enable`
-
- Enable the motor driver carrier's outputs. The motor driver carrier Initially is disabled, so it needs to be manually enabled using this function.
-
- Arguments:
- * None
-
- Returns:
- * None
+  Arguments:
+  * `value` over-current response (`1`, or `0`).
 
 
-* `disable`
+* `void enable(void);`
 
- Disable the motor driver carrier's outputs.
+  Enable the motor driver carrier's outputs. The motor driver carrier Initially is disabled, so it needs to be manually enabled using this function.
 
- Arguments:
- * None
+  Arguments:
+  * None
 
- Returns
- * None
+  Returns:
+  * None
+
+
+* `void disable(void);`
+
+  Disable the motor driver carrier's outputs.
+
+  Arguments:
+  * None
+
+  Returns
+  * None
