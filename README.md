@@ -1,5 +1,5 @@
 
-# TB9051FTG
+# TB9051FTGMotorCarrier
 This is an Arduino library for the Pololu TB9051FTG single brushed DC motor driver carrier.
 
 ## Getting started
@@ -10,8 +10,8 @@ You will need the Pololu [TB9051FTG Single Brushed DC Motor Driver Carrier](http
 You can install the library through the [LIbrary Manager](https://www.arduino.cc/en/guide/libraries) in the [Arduino IDE](https://www.arduino.cc/en/Main/Software).
 
 1. Open the Library Manager by clicking _Sketch > Include LIbrary > Manager Libraries ..._.
-2. Search for _TB9051FTG_.
-3. Click on the TB9051FTG entry.
+2. Search for _TB9051FTGMotorCarrier_.
+3. Click on the _TB9051FTGMotorCarrier_ entry.
 4. (Optional) Select the version you want to install by selecting it in the drop-down menu. The Library Manager defaults to the latest version.
 5. Click _Install_.
 
@@ -35,11 +35,11 @@ For information regarding the TB9051FTG motor driver carrier's pinout, see the D
    As an example, the program should pass this constant to the constructor when the EN pin on the motor carrier is not connected to the Arduino (i.e., when the EN pin is electrically connected to VCC or GND).
 
 ### Constructor
-* `TB9051FTG(uint8_t pwm1, uint8_t pwm2, uint8_t ocm = kPinNotUsed,
-              uint8_t diag = kPinNotUsed, uint8_t occ = kPinNotUsed,
-              uint8_t en = kPinNotUsed, uint8_t enb = kPinNotUsed);`
+* `TB9051FTGMotorCarrier(uint8_t pwm1, uint8_t pwm2, uint8_t ocm = kPinNotUsed,
+                          uint8_t diag = kPinNotUsed, uint8_t occ = kPinNotUsed,
+                          uint8_t en = kPinNotUsed, uint8_t enb = kPinNotUsed);`
 
-  Custom constructor for the TB9051FTG. It configures all the pins and sets some default operating modes. Some arguments have default values, so they do not need to be specified when calling the constructor. An exception to this is when a non-default argument is specified after default arguments. In this case, the unused arguments need to be specified with `kPinNotUsed`.
+  Custom constructor for the TB9051FTGMotorCarrier. It configures all the pins and sets some default operating modes. Some arguments have default values, so they do not need to be specified when calling the constructor. An exception to this is when a non-default argument is specified after default arguments. In this case, the unused arguments need to be specified with `kPinNotUsed`.
 
   Arguments:
   * `pwm1` The pin number connected to the PWM1 input on the motor driver carrier.

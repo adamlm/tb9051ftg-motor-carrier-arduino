@@ -1,11 +1,11 @@
-#include <TB9051FTG.h>
+#include <TB9051FTGMotorCarrier.h>
 
-// TB9051FTG pin definitions
+// TB9051FTGMotorCarrier pin definitions
 static constexpr uint8_t pwm1Pin{5};
 static constexpr uint8_t pwm2Pin{6};
 
-// Instantiate TB9051FTG
-static const TB9051FTG driver{pwm1Pin, pwm2Pin};
+// Instantiate TB9051FTGMotorCarrier
+static const TB9051FTGMotorCarrier driver{pwm1Pin, pwm2Pin};
 
 static float throttlePercent{0.0f};
 

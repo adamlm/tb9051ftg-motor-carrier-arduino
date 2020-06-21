@@ -4,14 +4,18 @@
 
 constexpr uint8_t kPinNotUsed{255};
 
-class TB9051FTG {
+class TB9051FTGMotorCarrier {
 public:
     /**
      * Custom constructor.
      */
-    TB9051FTG(uint8_t pwm1, uint8_t pwm2, uint8_t ocm = kPinNotUsed,
-              uint8_t diag = kPinNotUsed, uint8_t occ = kPinNotUsed,
-              uint8_t en = kPinNotUsed, uint8_t enb = kPinNotUsed);
+    TB9051FTGMotorCarrier(uint8_t pwm1,
+                           uint8_t pwm2,
+                           uint8_t ocm = kPinNotUsed,
+                           uint8_t diag = kPinNotUsed,
+                           uint8_t occ = kPinNotUsed,
+                           uint8_t en = kPinNotUsed,
+                           uint8_t enb = kPinNotUsed);
 
     // Getters
     float getCurrent(void) const;
