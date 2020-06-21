@@ -1,0 +1,19 @@
+# Syntax Coloring Map for TB9051FTGMotorCarrier Library
+
+# Datatypes (KEYWORD1)
+
+# Methods and Functions (KEYWORD2)
+getCurrent	KEYWORD2
+getDiagnostic	KEYWORD2
+setDeadband	KEYWORD2
+setBrakeMode	KEYWORD2
+setOutput	KEYWORD2
+setOcc	KEYWORD2
+enable	KEYWORD2
+disable	KEYWORD2
+
+# Instances (KEYWORD2)
+TB9051FTGMotorCarrier	KEYWORD2
+
+# Constants (LITERAL1)
+kPinNotUsed	LITERAL1
