@@ -1,19 +1,22 @@
-#include "TB9051FTG.h"
+#include "TB9051FTGMotorCarrier.h"
 
-TB9051FTG::TB9051FTG(const uint8_t pwm1, const uint8_t pwm2,
-                     const uint8_t ocm, const uint8_t diag,
-                     const uint8_t occ, const uint8_t en,
-                     const uint8_t enb) :
-                     pwm1(pwm1),
-                     pwm2(pwm2),
-                     ocm(ocm),
-                     diag(diag),
-                     occ(occ),
-                     en(en),
-                     enb(enb),
-                     brakeMode(false),
-                     deadbandLower(0),
-                     deadbandUpper(0) {
+TB9051FTGMotorCarrier::TB9051FTGMotorCarrier(const uint8_t pwm1,
+                                               const uint8_t pwm2,
+                                               const uint8_t ocm,
+                                               const uint8_t diag,
+                                               const uint8_t occ,
+                                               const uint8_t en,
+                                               const uint8_t enb) :
+                                               pwm1(pwm1),
+                                               pwm2(pwm2),
+                                               ocm(ocm),
+                                               diag(diag),
+                                               occ(occ),
+                                               en(en),
+                                               enb(enb),
+                                               brakeMode(false),
+                                               deadbandLower(0),
+                                               deadbandUpper(0) {
 
     pinMode(this->pwm1, OUTPUT);
     pinMode(this->pwm2, OUTPUT);
@@ -39,7 +42,7 @@ TB9051FTG::TB9051FTG(const uint8_t pwm1, const uint8_t pwm2,
     }
 }
 
-float TB9051FTG::getCurrent(void) const {
+float TB9051FTGMotorCarrier::getCurrent(void) const {
     if (this->ocm != kPinNotUsed) {
         // 4.9 mV per analog unit (for Arduino Uno)
         // 500 mV per A on TB9051FTG current sense
@@ -50,20 +53,20 @@ float TB9051FTG::getCurrent(void) const {
     return kPinNotUsed;
 }
 
-uint8_t TB9051FTG::getDiagnostic(void) const {
+uint8_t TB9051FTGMotorCarrier::getDiagnostic(void) const {
     return this->diag != kPinNotUsed? digitalRead(this->diag): kPinNotUsed;
 }
 
-void TB9051FTG::setDeadband(const float lower, const float upper) {
+void TB9051FTGMotorCarrier::setDeadband(const float lower, const float upper) {
     this->deadbandLower = lower;
     this->deadbandUpper = upper;
 }
 
-void TB9051FTG::setBrakeMode(const bool brakeMode) {
+void TB9051FTGMotorCarrier::setBrakeMode(const bool brakeMode) {
     this->brakeMode = brakeMode;
 }
 
-void TB9051FTG::setOutput(const float percent) const {
+void TB9051FTGMotorCarrier::setOutput(const float percent) const {
     const auto output{static_cast<uint8_t>(abs(percent) * 255)};
 
     if (withinDeadband(percent)) {
@@ -84,27 +87,27 @@ void TB9051FTG::setOutput(const float percent) const {
     }
 }
 
-void TB9051FTG::setOcc(const uint8_t value) const {
+void TB9051FTGMotorCarrier::setOcc(const uint8_t value) const {
     if (this->occ != kPinNotUsed) {
         digitalWrite(this->occ, value);
     }
 }
 
-void TB9051FTG::enable(void) {
+void TB9051FTGMotorCarrier::enable(void) {
     this->enabled = true;
     enableOutputs();
 }
 
-void TB9051FTG::disable(void) {
+void TB9051FTGMotorCarrier::disable(void) {
     this->enabled = false;
     disableOutputs();
 }
 
-bool TB9051FTG::withinDeadband(const float value) const {
+bool TB9051FTGMotorCarrier::withinDeadband(const float value) const {
     return value < this->deadbandUpper && value > this->deadbandLower;
 }
 
-void TB9051FTG::enableOutputs(void) const {
+void TB9051FTGMotorCarrier::enableOutputs(void) const {
     if (this->en != kPinNotUsed) {
         digitalWrite(this->en, 1);
     }
@@ -114,7 +117,7 @@ void TB9051FTG::enableOutputs(void) const {
     }
 }
 
-void TB9051FTG::disableOutputs(void) const {
+void TB9051FTGMotorCarrier::disableOutputs(void) const {
     if (this->en != kPinNotUsed) {
         digitalWrite(this->en, 0);
     }

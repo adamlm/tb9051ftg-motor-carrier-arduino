@@ -1,4 +1,4 @@
-# Syntax Coloring Map for TB90501FTG Library
+# Syntax Coloring Map for TB9051FTGMotorCarrier Library
 
 # Datatypes (KEYWORD1)
 
@@ -13,7 +13,7 @@ enable	KEYWORD2
 disable	KEYWORD2
 
 # Instances (KEYWORD2)
-TB9051FTG	KEYWORD2
+TB9051FTGMotorCarrier	KEYWORD2
 
 # Constants (LITERAL1)
 kPinNotUsed	LITERAL1
