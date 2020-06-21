@@ -100,11 +100,11 @@ For information regarding the TB9051FTG motor driver carrier's pinout, see the D
 
   Sets the throttle output percentage [-1, 1], which is the percentage of the driver carrier's input voltage. When the output percentage is negative, the motor will turn in reverse.
 
- Arguments:
- * `percent` output throttle percentage.
+  Arguments:
+  * `percent` output throttle percentage.
 
- Returns
- * None
+  Returns
+  * None
 
 
 * `void setOcc(uint8_t value) const;`
@@ -113,6 +113,9 @@ For information regarding the TB9051FTG motor driver carrier's pinout, see the D
 
   Arguments:
   * `value` over-current response (`1`, or `0`).
+  
+  Returns:
+  * None
 
 
 * `void enable(void);`
