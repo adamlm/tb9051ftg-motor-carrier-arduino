@@ -6,7 +6,7 @@ static constexpr uint8_t pwm2Pin{6};
 static constexpr uint8_t ocmPin{A1};
 
 // Instantiate TB9051FTGMotorCarrier
-static const TB9051FTGMotorCarrier driver{pwm1Pin, pwm2Pin, ocmPin};
+static TB9051FTGMotorCarrier driver{pwm1Pin, pwm2Pin, ocmPin};
 
 void setup() {
   Serial.begin(9600);

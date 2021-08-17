@@ -5,7 +5,7 @@ static constexpr uint8_t pwm1Pin{5};
 static constexpr uint8_t pwm2Pin{6};
 
 // Instantiate TB9051FTGMotorCarrier
-static const TB9051FTGMotorCarrier driver{pwm1Pin, pwm2Pin};
+static TB9051FTGMotorCarrier driver{pwm1Pin, pwm2Pin};
 
 static float throttlePercent{0.0f};
 
